@@ -118,9 +118,29 @@ app.post('/claimCoins', (req, res) => {
 		return res.render('noAddressSpecified', {
 			locals: res.locals,
 			status: status,
-			reason: 'The address you put in is the faucet\'s wallet address.'
+			reason: 'The address you put in is the faucet\'s wallet address.'})
+
+	 	if(req.body['g-recaptcha-response'] === undefined || req.body['g-recaptcha-response'] === '' || req.body['g-recaptcha-response'] === null)
+  	{
+    	return res.json({"responseError" : "Please select captcha first"});
+  	}
+  		const secretKey = "--your secret key--";
+
+  		const verificationURL = "https://www.google.com/recaptcha/api/siteverify?secret=" + secretKey + "&response=" + req.body['g-recaptcha-response'] + "&remoteip=" + req.connection.remoteAddress;
+
+  		request(verificationURL,function(error,response,body) {
+    	body = JSON.parse(body);
+
+    	if(body.success !== undefined && !body.success) {
+      	return res.json({"responseError" : "Failed captcha verification"});
+    	}
+    	res.json({"responseSuccess" : "Sucess"});
 		})
 	}
+
+
+
+
 
 	addressesDatabase.findOne({
 		address: req.body.address
@@ -286,3 +306,4 @@ function prettyAmounts(amount) {
 
 	return (j ? i.substr(0, j) + ',' : '') + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1,") + (decimalPlaces ? '.' + Math.abs(amount - i).toFixed(decimalPlaces).slice(2) : '')
 }
+
