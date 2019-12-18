@@ -22,19 +22,34 @@ block tabs
 		a(href="/cooldowns") Cooldowns
 	li
 		a(href="/about") About
-
+	li
+		a(href="https://paper.nashcash.net" target="_blank") PaperWallet
+	
 block body
-	p You will recieve between #{locals.minCoins} #{locals.ticker} and #{locals.maxCoins} #{locals.ticker}!
+	script(src='https://www.google.com/recaptcha/api.js', async='', defer='')															//recaptcha
+		p You will recieve between #{locals.minCoins} #{locals.ticker} and #{locals.maxCoins} #{locals.ticker}!
 
-	br
+		br
 
 	div.notification.is-info
 		p Please note that you can only claim coins every #{locals.claimableEvery}.
 
-	form(action="/claimCoins", method="post")
+	form#sendcoins(action="/claimCoins", method="post")
+	
 		input.input(type="text", name="address", placeholder=coinWalletDescription)
 
 		br
 		br
 
-		input.button.is-primary.is-rounded(type="submit", name="submit", value="Claim your coins!")
+		button.btn.btn-default.g-recaptcha(data-sitekey="--your site key--", data-callback="onSubmit") Submit 							//recaptcha on button
+
+	script.																																
+		function onSubmit(token) {																										//recaptcha execute
+		document.getElementById("sendcoins").submit();}
+
+
+
+		
+
+
+
