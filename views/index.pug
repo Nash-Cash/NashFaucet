@@ -17,7 +17,7 @@ extends ./template.pug
 
 block tabs
 	li.is-active
-		a.is-active(href="/") Faucet
+		a(href="/") Faucet
 	li
 		a(href="/cooldowns") Cooldowns
 	li
@@ -26,30 +26,19 @@ block tabs
 		a(href="https://paper.nashcash.net" target="_blank") PaperWallet
 	
 block body
-	script(src='https://www.google.com/recaptcha/api.js', async='', defer='')															//recaptcha
-		p You will recieve between #{locals.minCoins} #{locals.ticker} and #{locals.maxCoins} #{locals.ticker}!
-
-		br
-
 	div.notification.is-info
-		p Please note that you can only claim coins every #{locals.claimableEvery}.
+		p Please note that this can vary depending on the balance of the faucet wallet.
 
-	form#sendcoins(action="/claimCoins", method="post")
-	
+	form#sendcoins(action="/claimCoins", method="POST")
+
 		input.input(type="text", name="address", placeholder=coinWalletDescription)
 
 		br
 		br
 
-		button.btn.btn-default.g-recaptcha(data-sitekey="--your site key--", data-callback="onSubmit") Submit 							//recaptcha on button
+		button.button.is-primary.is-rounded.g-recaptcha(data-sitekey="YOUR SITEKEY", data-callback="onSubmit") Submit
 
-	script.																																
-		function onSubmit(token) {																										//recaptcha execute
-		document.getElementById("sendcoins").submit();}
-
-
-
-		
-
-
-
+	script.
+		function onSubmit(token) {
+			document.getElementById("sendcoins").submit();
+		}

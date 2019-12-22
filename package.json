@@ -14,12 +14,10 @@
   "private": false,
   "dependencies": {
     "body-parser": "^1.17.2",
-    "ejs": "^2.5.7",
     "express": "^4.15.4",
-    "google-recaptcha": "^1.1.0",
     "nedb-promises": "^4.0.0",
     "pug": "^2.0.4",
-    "request": "^2.88.0",
+    "request-promise": "^4.2.5",
     "terminal-kit": "^1.31.7",
     "turtlecoin-rpc": "^2.0.2"
   },

@@ -29,7 +29,7 @@ module.exports = {
 
 		// The wallet to open
 		walletToOpen: {
-			filename: 'faucet',
+			filename: 'faucet.wallet',
 			password: 'faucet',
 			daemon: {
 				host: '127.0.0.1',
@@ -39,7 +39,7 @@ module.exports = {
 
 		// The server the wallet API is running on
 		host: '127.0.0.1',
-		port: 8070,
+		port: 8065,
 
 		// Password for the wallet API
 		password: 'faucet',
@@ -58,10 +58,10 @@ module.exports = {
 		port: 8909,
 
 		// The minimum amount of coins to be sent
-		minimumCoinsToBeSent: 15,
+		minimumCoinsToBeSent: 0.5,
 
 		// The maximum amount of coins to be sent
-		maximumCoinsToBeSent: 1000,
+		maximumCoinsToBeSent: 12,
 
 		// Address validation
 		walletAddressLength: 98,
@@ -81,7 +81,7 @@ module.exports = {
 		claimableEvery: '24 hours',
 
 		// The person this faucet is run by, with Discord Tag
-		faucetOwner: 'TheDevMinerTV',
-		faucetOwnerDiscord: 'TheDevMinerTV (XNU)#9308'
+		faucetOwner: 'Lein Ad',
+		faucetOwnerDiscord: 'Lein Ad#5415'
 	}
 }
